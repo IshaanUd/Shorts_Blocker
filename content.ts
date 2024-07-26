@@ -3,7 +3,7 @@ function isYouTubeShort() :void{
 }
   
   function checkCurrentPage() :void {
-     // checks current page, if it is a youtube short, then it 
+     
   }
 
 
