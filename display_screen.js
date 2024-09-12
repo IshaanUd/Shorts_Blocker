@@ -6,17 +6,28 @@ function checkForShortsURL() {
     }
 }
 function displayCustomScreen() {
-    // Create an iframe to load the custom screen
-    var iframe = document.createElement('iframe');
-    iframe.src = chrome.runtime.getURL('popup.html'); // Load popup.html in the iframe
-    iframe.style.position = 'fixed';
-    iframe.style.top = '0';
-    iframe.style.left = '0';
-    iframe.style.width = '100%';
-    iframe.style.height = '100%';
-    iframe.style.border = 'none';
-    iframe.style.zIndex = '9999'; // Ensure it's on top of other elements
-    document.body.innerHTML = ''; // Optionally clear the page content before displaying the iframe
-    document.body.appendChild(iframe); // Add the iframe to the document
+    // Create a full-screen div to cover the page
+    var overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw'; // Full width of the viewport
+    overlay.style.height = '100vh'; // Full height of the viewport
+    overlay.style.backgroundColor = '#f44336'; // Red background color
+    overlay.style.zIndex = '9999'; // Ensure it's on top of other elements
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.color = 'white';
+    overlay.style.fontFamily = 'Arial, sans-serif';
+    // Add a message to the overlay
+    var message = document.createElement('div');
+    message.innerHTML = "\n        <h1>YouTube Shorts Blocked</h1>\n        <p>We noticed you are watching a YouTube Short.<br>Please enjoy full-length videos instead!</p>\n    ";
+    message.style.textAlign = 'center';
+    // Append the message to the overlay
+    overlay.appendChild(message);
+    // Clear the page content and append the overlay
+    document.body.innerHTML = ''; // Clear the current page content
+    document.body.appendChild(overlay); // Add the overlay to the page
 }
 checkForShortsURL(); // Run the function to check and block Shorts
